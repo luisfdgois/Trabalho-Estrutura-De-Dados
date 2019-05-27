@@ -7,14 +7,19 @@ public class MEEstruturaDeDados {
 
     public static void main(String[] args) {
         
-        //long start  = System.currentTimeMillis();
+        //Iniciando o tempo de leitura do arquivo
+        long startArq  = System.currentTimeMillis();
         
         //Lista armazena os dados do arquivo
         List<String> arquivo = Arquivo.Read();
         
-        //long stop = System.currentTimeMillis() - start;
-       // System.out.println(" Leitura do arquivo: " + stop/1000);
+        //Finalizando o tempo de leitura do arquivo
+        long stopArq = System.currentTimeMillis() - startArq;
+        System.out.println(" Tempo de leitura do arquivo em segundos: " + stopArq/1000);
         
+        
+        //Iniciando o tempo de inserção dos dados em suas respectivas hashtable
+        long startDado = System.currentTimeMillis();
         
         //Coleções responsáveis por armazenar oa dados(do arquivo) de cada objeto
         HashTable<String, UnidadeFederacao> ufs = new HashTable();
@@ -84,38 +89,46 @@ public class MEEstruturaDeDados {
             }
             i++;
         }
+        
+        //Finalizando o tempo de inserção
+        long stopDado = System.currentTimeMillis() - startDado;
+        System.out.println(" Tempo de inserção dos dados em segundos: " + stopDado/1000);
 
-        /*
-        Logradouro obj = logradouros.Buscar("35024440");
+        
+        //Inciando o tempo de busca por um logradouro
+        long startBusca = System.currentTimeMillis();
+        
+        Logradouro obj = logradouros.Buscar("49320970");
 
         if (obj != null) {
 
             if (obj.getBairro() == null && obj.getNomeLogradouro() == null) {
-                JOptionPane.showMessageDialog(null, " Cep: " + obj.getCep()
+                System.out.println(" Cep: " + obj.getCep()
                         + "\n Cidade: " + obj.getCidade().getNome()
                         + "\n UF: " + obj.getUf().getSigla());
             } else {
-                JOptionPane.showMessageDialog(null, " Cep: " + obj.getCep()
+                System.out.println("Cep: " + obj.getCep()
                         + "\n Cidade: " + obj.getCidade().getNome()
                         + "\n UF: " + obj.getUf().getSigla()
                         + "\n Bairro: " + obj.getBairro().getNome()
                         + "\n Logradouro: " + obj.getNomeLogradouro());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "ERRO!");
+            System.out.println("ERRO!");
         }
-        */
-        //long stop = System.currentTimeMillis() - start;
-       // System.out.println(" Tempo de busca pelo cep: " + stop/1000);
+        
+        //Finalizando o tempo de busca
+        long stopBusca = System.currentTimeMillis() - startBusca;
+        System.out.println(" Tempo de busca de um logradouro por cep: " + stopBusca/1000);
         
         
-        
+        //Busca dos lagradouros de um bairro
         long start = System.currentTimeMillis();
         
         UnidadeFederacao u = ufs.Buscar("SE");
         Cidade c = u.GetCidade("Aracaju");
         System.out.println(" Cidade: " + c.getNome());
-        Bairro b = c.getBairros("Bugio");
+        Bairro b = c.getBairros("Farolândia");
 
         if (b != null) {
 
@@ -132,7 +145,7 @@ public class MEEstruturaDeDados {
         }
 
         long stop = System.currentTimeMillis() - start;
-        System.out.println(" Tempo de busca dos logradouros de um bairro: " + stop/1000);
+        System.out.println(" Tempo em segundos na busca dos logradouros de um bairro: " + stop/1000);
 
     }
     
